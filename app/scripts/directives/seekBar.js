@@ -73,6 +73,14 @@
                          $document.unbind('mouseup.thumb');
                      });
                  };
+                 /**
+                 * @function thumbStyle
+                 * @desc moves .thumb to value of the click event or mousedown event
+                 * @return {css} sets thumb left property
+                 */
+                 scope.thumbStyle = function() {
+                    return {left: percentString()}; 
+                 };
 
 	        }
         };
