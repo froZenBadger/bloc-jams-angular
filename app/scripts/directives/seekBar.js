@@ -20,12 +20,22 @@
             templateUrl: '/templates/directives/seek_bar.html',
             replace: true,
             restrict: 'E',
-	        scope: { },
+	        scope: {
+                onChange: '&'
+            },
 	        link: function(scope, element, attributes) {
                  scope.value = 0;
                  scope.max = 100;
      
                  var seekBar = $(element);
+
+                 attributes.$observe('value', function(newValue) {
+                    scope.value = newValue;
+                 });
+
+                 attributes.$observe('max',function(newValue) {
+                    scope.max = newValue;
+                 });
 
                  /**
                  * @function perecentString
@@ -55,6 +65,9 @@
                  scope.onClickSeekBar = function(event) {
                      var percent = calculatePercent(seekBar, event);
                      scope.value = percent * scope.max;
+                     console.log('here1');
+                     notifyOnChange(scope.value);
+                     console.log('did i make it');
                  };
                  /**
                  * @function trackThumb
@@ -65,6 +78,9 @@
                          var percent = calculatePercent(seekBar, event);
                          scope.$apply(function() {
                              scope.value = percent * scope.max;
+                             console.log('here1.1');
+                             notifyOnChange(scope.value);
+                             console.log('here2.1');
                          });
                      });
                  
@@ -73,6 +89,13 @@
                          $document.unbind('mouseup.thumb');
                      });
                  };
+
+                 var notifyOnChange = function(newValue) {
+                     if (typeof scope.onChange === 'function') {
+                         scope.onChange({value: newValue});
+                     }
+                 };
+
                  /**
                  * @function thumbStyle
                  * @desc moves .thumb to value of the click event or mousedown event
