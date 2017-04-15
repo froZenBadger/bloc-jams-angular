@@ -79,6 +79,13 @@
          * @type {Number}
          */
          SongPlayer.currentTime = null;
+
+         /**
+         * @desc Current volume on scale 1-100
+         * @type {Number}
+         */
+         SongPlayer.volume = 50;
+
          /**
          * @function play
          * @desc Checks whether playing new or current song, if new song than calls setSong and playSong. If current song than just calls playSong.
@@ -152,6 +159,16 @@
             if (currentBuzzObject) {
                 currentBuzzObject.setTime(time);
             }
+        };
+
+        /**
+         * @function setVolume
+         * @desc Set volume (0-100) for music
+         * @param {Number} volume
+         */
+        SongPlayer.setVolume = function(volume) {
+            currentBuzzObject.setVolume(volume);
+            SongPlayer.volume = currentBuzzObject.getVolume();
         };
 
         return SongPlayer;

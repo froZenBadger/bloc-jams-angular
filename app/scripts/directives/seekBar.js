@@ -65,9 +65,7 @@
                  scope.onClickSeekBar = function(event) {
                      var percent = calculatePercent(seekBar, event);
                      scope.value = percent * scope.max;
-                     console.log('here1');
                      notifyOnChange(scope.value);
-                     console.log('did i make it');
                  };
                  /**
                  * @function trackThumb
@@ -78,9 +76,7 @@
                          var percent = calculatePercent(seekBar, event);
                          scope.$apply(function() {
                              scope.value = percent * scope.max;
-                             console.log('here1.1');
                              notifyOnChange(scope.value);
-                             console.log('here2.1');
                          });
                      });
                  
