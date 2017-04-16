@@ -8,6 +8,7 @@
                  <a ui-sref="album">{{ album.artist }}</a>
                  <br/>
                  {{ album.songs.length }} songs
+                  {{ collection.getTime() | timecode }} 
                  <br/>
              </p>
          </div>
